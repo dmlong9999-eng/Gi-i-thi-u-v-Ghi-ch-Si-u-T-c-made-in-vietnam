@@ -5,39 +5,25 @@ import json
 from datetime import datetime
 import re 
 from tkinter import font as tkfont # Import tkfont để quản lý font
-
-# --- GLOBAL CONFIGURATION ---
+
 DATA_FILEPATH = None
 ALL_NOTES = []
 CURRENT_NOTE_INDEX = -1
 LAST_NOTE_CONTENT_HASH = None 
 IS_READ_MODE_ACTIVE = False 
 
-CURRENT_FONT_FAMILY = "Inter" # Font mặc định
+CURRENT_FONT_FAMILY = "Inter"
 CURRENT_FONT_SIZE = 12
-
-# --- HÀM FONT VÀ STYLING ---
-
-def change_font(text_area, new_font_family):
-    """Thay đổi font chữ và cập nhật tất cả các tag liên quan."""
-    global CURRENT_FONT_FAMILY
-    
-    CURRENT_FONT_FAMILY = new_font_family
-    
-    # Cập nhật font chính của text area
-    text_area.config(font=(CURRENT_FONT_FAMILY, CURRENT_FONT_SIZE))
-    
-    # Cập nhật các tag styling để kế thừa font mới
+
+def change_font(text_area, new_font_family):
+    global CURRENT_FONT_FAMILY
+    CURRENT_FONT_FAMILY = new_font_family
+    text_area.config(font=(CURRENT_FONT_FAMILY, CURRENT_FONT_SIZE))
     text_area.tag_config('bold_tag', font=(CURRENT_FONT_FAMILY, CURRENT_FONT_SIZE, "bold"))
-    text_area.tag_config('italic_tag', font=(CURRENT_FONT_FAMILY, CURRENT_FONT_SIZE, "italic"))
-    
-    # ĐÃ XÓA "cursor='hand2'" TỪ TAG LINK TAG GÂY LỖI: unknown option "-cursor"
-    text_area.tag_config('link_tag', font=(CURRENT_FONT_FAMILY, CURRENT_FONT_SIZE), foreground="#3498DB", underline=1)
-    
-    # Cập nhật tag cho Block Title (Header 3)
+    text_area.tag_config('italic_tag', font=(CURRENT_FONT_FAMILY, CURRENT_FONT_SIZE, "italic"))
+    text_area.tag_config('link_tag', font=(CURRENT_FONT_FAMILY, CURRENT_FONT_SIZE), foreground="#3498DB", underline=1)
     text_area.tag_config('h3_tag', font=(CURRENT_FONT_FAMILY, CURRENT_FONT_SIZE + 2, "bold"), foreground="#2980B9")
-    
-    # Kích hoạt lại parse markdown nếu đang ở chế độ đọc để áp dụng font ngay lập tức
+    
     if IS_READ_MODE_ACTIVE:
         current_content = text_area.get("1.1", tk.END)
         parse_markdown_to_text_and_tags(current_content, text_area)
@@ -45,25 +31,18 @@ def change_font(text_area, new_font_family):
     print(f"Font đã được đổi thành: {new_font_family}")
 
 
-def parse_markdown_to_text_and_tags(content, text_area):
-    """
-    Phân tích Markdown đơn giản (Bold, Italic, Link, Header 3) để áp dụng styling.
-    """
-    # Xóa tất cả các tag cũ
+def parse_markdown_to_text_and_tags(content, text_area):
     for tag in ['bold_tag', 'italic_tag', 'link_tag', 'hide_tag', 'h3_tag']:
         text_area.tag_remove(tag, "1.0", tk.END)
-    
-    # 1. Bold: **text** hoặc __text__
+    
     pattern_bold = re.compile(r'(\*\*|__)(.+?)(\*\*|__)', re.DOTALL)
     for match in pattern_bold.finditer(content):
         start_index = match.start()
         end_index = match.end()
         inner_start = start_index + 2
         inner_end = end_index - 2
-        
-        # Áp dụng tag cho nội dung bên trong
+        
         text_area.tag_add('bold_tag', text_area.index(f"1.0 + {inner_start} chars"), text_area.index(f"1.0 + {inner_end} chars"))
-        # Ẩn ký tự Markdown (** hoặc __)
         text_area.tag_add('hide_tag', text_area.index(f"1.0 + {start_index} chars"), text_area.index(f"1.0 + {start_index+2} chars"))
         text_area.tag_add('hide_tag', text_area.index(f"1.0 + {end_index-2} chars"), text_area.index(f"1.0 + {end_index} chars"))
 
