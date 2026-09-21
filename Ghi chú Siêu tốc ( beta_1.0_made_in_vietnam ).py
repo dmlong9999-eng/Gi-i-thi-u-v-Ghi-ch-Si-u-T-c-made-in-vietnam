@@ -27,10 +27,8 @@ def change_font(text_area, new_font_family):
     if IS_READ_MODE_ACTIVE:
         current_content = text_area.get("1.1", tk.END)
         parse_markdown_to_text_and_tags(current_content, text_area)
-    
-    print(f"Font đã được đổi thành: {new_font_family}")
-
-
+    print(f"Font đã được đổi thành: {new_font_family}")
+
 def parse_markdown_to_text_and_tags(content, text_area):
     for tag in ['bold_tag', 'italic_tag', 'link_tag', 'hide_tag', 'h3_tag']:
         text_area.tag_remove(tag, "1.0", tk.END)
@@ -45,8 +43,7 @@ def parse_markdown_to_text_and_tags(content, text_area):
         text_area.tag_add('bold_tag', text_area.index(f"1.0 + {inner_start} chars"), text_area.index(f"1.0 + {inner_end} chars"))
         text_area.tag_add('hide_tag', text_area.index(f"1.0 + {start_index} chars"), text_area.index(f"1.0 + {start_index+2} chars"))
         text_area.tag_add('hide_tag', text_area.index(f"1.0 + {end_index-2} chars"), text_area.index(f"1.0 + {end_index} chars"))
-
-    # 2. Italic: *text* hoặc _text_
+
     pattern_italic = re.compile(r'(\*|_)(.+?)(\*|_)', re.DOTALL)
     for match in pattern_italic.finditer(content):
         start_index = match.start()
@@ -57,43 +54,29 @@ def parse_markdown_to_text_and_tags(content, text_area):
         text_area.tag_add('italic_tag', text_area.index(f"1.0 + {inner_start} chars"), text_area.index(f"1.0 + {inner_end} chars"))
         text_area.tag_add('hide_tag', text_area.index(f"1.0 + {start_index} chars"), text_area.index(f"1.0 + {start_index+1} chars"))
         text_area.tag_add('hide_tag', text_area.index(f"1.0 + {end_index-1} chars"), text_area.index(f"1.0 + {end_index} chars"))
-
-    # 3. Link: [text](url) - Chỉ áp dụng styling cho [text]
+
     pattern_link = re.compile(r'\[(.*?)\]\((.*?)\)', re.DOTALL)
     for match in pattern_link.finditer(content):
         full_start = match.start()
         full_end = match.end()
         text_content = match.group(1)
         text_start_index = content.find(text_content, full_start)
-        text_end_index = text_start_index + len(text_content)
-
+        text_end_index = text_start_index + len(text_content)
         text_area.tag_add('link_tag', text_area.index(f"1.0 + {text_start_index} chars"), text_area.index(f"1.0 + {text_end_index} chars"))
-        
-        # Ẩn các ký tự Markdown còn lại ([ ] ( url ))
         text_area.tag_add('hide_tag', text_area.index(f"1.0 + {full_start} chars"), text_area.index(f"1.0 + {full_start+1} chars"))
         bracket_index = content.find('](', text_end_index - 1)
         if bracket_index != -1:
-             text_area.tag_add('hide_tag', text_area.index(f"1.0 + {bracket_index} chars"), text_area.index(f"1.0 + {full_end} chars"))
-
-    # 4. Header 3 (Block Title Styling): ### Title
-    # Bắt đầu dòng, theo sau là ###, khoảng trắng và nội dung.
+            text_area.tag_add('hide_tag', text_area.index(f"1.0 + {bracket_index} chars"), text_area.index(f"1.0 + {full_end} chars"))
+
     pattern_h3 = re.compile(r'(^###\s*.*?)(\n|$)', re.MULTILINE)
     for match in pattern_h3.finditer(content):
         full_match_text = match.group(1)
         start_index = match.start()
-        end_index = start_index + len(full_match_text)
-        
-        # Áp dụng tag cho toàn bộ dòng (trừ ký tự xuống dòng)
+        end_index = start_index + len(full_match_text)
         text_area.tag_add('h3_tag', text_area.index(f"1.0 + {start_index} chars"), text_area.index(f"1.0 + {end_index} chars"))
-        
-        # Ẩn ký tự Markdown '### ' (4 ký tự)
         text_area.tag_add('hide_tag', text_area.index(f"1.0 + {start_index} chars"), text_area.index(f"1.0 + {start_index + 4} chars"))
-        
-    # Áp dụng styling cuối cùng
-    change_font(text_area, CURRENT_FONT_FAMILY) # Đảm bảo font luôn được áp dụng
-
-# --- HÀM XỬ LÝ DỮ LIỆU TẬP TRUNG (JSON) ---
-
+        
+    change_font(text_area, CURRENT_FONT_FAMILY)
 def read_notes_from_file():
     """Đọc toàn bộ ghi chú từ file JSON đã chọn."""
     global ALL_NOTES, LAST_NOTE_CONTENT_HASH
