@@ -22,7 +22,7 @@ Có thể ghim ghi chú quan trọng lên đầu.
 Cho phép dán link trực tiếp vào ghi chú.
 Đề Mục và Tags phân tách bằng dấu phẩy để quản lý rõ ràng.
 
-5.Cá Nhân Hóa 
+5. Cá Nhân Hóa 
 Chọn font hiển thị cho dễ đọc.
 Không giới hạn dòng trong mục chính.
 
