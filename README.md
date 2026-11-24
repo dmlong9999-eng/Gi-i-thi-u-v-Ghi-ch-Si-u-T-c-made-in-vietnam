@@ -1,1 +1,1 @@
-Đây là một ghi chú chạy trực tiếp tiếp trên Python, vì còn sơ khai nên chưa có .exe và vẫn còn lỗi. Nó chỉ là một ứng dụng Ghi Chú bình thường, bạn phải tạo file lưu mới và nhớ địa chỉ đường dẫn của file đó để mỡ.
+Đây là một ghi chú chạy trực tiếp tiếp trên Python, vì còn sơ khai nên chưa có .exe và vẫn còn lỗi. Nó chỉ là một ứng dụng Ghi Chú bình thường, bạn phải tạo file lưu mới và nhớ địa chỉ đường dẫn của file đó để mở.
