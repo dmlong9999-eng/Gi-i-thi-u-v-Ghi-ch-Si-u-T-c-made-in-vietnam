@@ -26,4 +26,6 @@ Cho phép dán link trực tiếp vào ghi chú.
 Chọn font hiển thị cho dễ đọc.
 Không giới hạn dòng trong mục chính.
 
+Phiên bản 1.0 ( Windows ): https://drive.google.com/file/d/1x6GnUE_bNTvHRWEO25FwGKz1ldM5TWt-/view?usp=sharing
+
 
