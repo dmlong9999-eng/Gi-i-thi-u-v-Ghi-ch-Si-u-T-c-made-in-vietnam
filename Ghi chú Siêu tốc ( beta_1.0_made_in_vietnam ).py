@@ -14,36 +14,51 @@ IS_READ_MODE_ACTIVE = False
 
 CURRENT_FONT_FAMILY = "Inter"
 CURRENT_FONT_SIZE = 12
-
-def change_font(text_area, new_font_family):
-    global CURRENT_FONT_FAMILY
-    CURRENT_FONT_FAMILY = new_font_family
-    text_area.config(font=(CURRENT_FONT_FAMILY, CURRENT_FONT_SIZE))
+
+
+def change_font(text_area, new_font_family):
+
+    global CURRENT_FONT_FAMILY
+
+    CURRENT_FONT_FAMILY = new_font_family
+
+    text_area.config(font=(CURRENT_FONT_FAMILY, CURRENT_FONT_SIZE))
+
     text_area.tag_config('bold_tag', font=(CURRENT_FONT_FAMILY, CURRENT_FONT_SIZE, "bold"))
-    text_area.tag_config('italic_tag', font=(CURRENT_FONT_FAMILY, CURRENT_FONT_SIZE, "italic"))
-    text_area.tag_config('link_tag', font=(CURRENT_FONT_FAMILY, CURRENT_FONT_SIZE), foreground="#3498DB", underline=1)
+    text_area.tag_config('italic_tag', font=(CURRENT_FONT_FAMILY, CURRENT_FONT_SIZE, "italic"))
+
+    text_area.tag_config('link_tag', font=(CURRENT_FONT_FAMILY, CURRENT_FONT_SIZE), foreground="#3498DB", underline=1)
+
     text_area.tag_config('h3_tag', font=(CURRENT_FONT_FAMILY, CURRENT_FONT_SIZE + 2, "bold"), foreground="#2980B9")
-    
+    
+
     if IS_READ_MODE_ACTIVE:
         current_content = text_area.get("1.1", tk.END)
         parse_markdown_to_text_and_tags(current_content, text_area)
-    print(f"Font đã được đổi thành: {new_font_family}")
-
-def parse_markdown_to_text_and_tags(content, text_area):
+    
+print("Font đã được đổi thành: {new_font_family}")
+
+
+def parse_markdown_to_text_and_tags(content, text_area):
+
+
     for tag in ['bold_tag', 'italic_tag', 'link_tag', 'hide_tag', 'h3_tag']:
         text_area.tag_remove(tag, "1.0", tk.END)
-    
+    
+
     pattern_bold = re.compile(r'(\*\*|__)(.+?)(\*\*|__)', re.DOTALL)
     for match in pattern_bold.finditer(content):
         start_index = match.start()
         end_index = match.end()
         inner_start = start_index + 2
         inner_end = end_index - 2
-        
+        
+
         text_area.tag_add('bold_tag', text_area.index(f"1.0 + {inner_start} chars"), text_area.index(f"1.0 + {inner_end} chars"))
         text_area.tag_add('hide_tag', text_area.index(f"1.0 + {start_index} chars"), text_area.index(f"1.0 + {start_index+2} chars"))
         text_area.tag_add('hide_tag', text_area.index(f"1.0 + {end_index-2} chars"), text_area.index(f"1.0 + {end_index} chars"))
-
+
+
     pattern_italic = re.compile(r'(\*|_)(.+?)(\*|_)', re.DOTALL)
     for match in pattern_italic.finditer(content):
         start_index = match.start()
@@ -54,28 +69,33 @@ def parse_markdown_to_text_and_tags(content, text_area):
         text_area.tag_add('italic_tag', text_area.index(f"1.0 + {inner_start} chars"), text_area.index(f"1.0 + {inner_end} chars"))
         text_area.tag_add('hide_tag', text_area.index(f"1.0 + {start_index} chars"), text_area.index(f"1.0 + {start_index+1} chars"))
         text_area.tag_add('hide_tag', text_area.index(f"1.0 + {end_index-1} chars"), text_area.index(f"1.0 + {end_index} chars"))
-
+
+
     pattern_link = re.compile(r'\[(.*?)\]\((.*?)\)', re.DOTALL)
     for match in pattern_link.finditer(content):
         full_start = match.start()
         full_end = match.end()
         text_content = match.group(1)
         text_start_index = content.find(text_content, full_start)
-        text_end_index = text_start_index + len(text_content)
+        text_end_index = text_start_index + len(text_content)
+
         text_area.tag_add('link_tag', text_area.index(f"1.0 + {text_start_index} chars"), text_area.index(f"1.0 + {text_end_index} chars"))
         text_area.tag_add('hide_tag', text_area.index(f"1.0 + {full_start} chars"), text_area.index(f"1.0 + {full_start+1} chars"))
         bracket_index = content.find('](', text_end_index - 1)
         if bracket_index != -1:
             text_area.tag_add('hide_tag', text_area.index(f"1.0 + {bracket_index} chars"), text_area.index(f"1.0 + {full_end} chars"))
-
+
+
     pattern_h3 = re.compile(r'(^###\s*.*?)(\n|$)', re.MULTILINE)
     for match in pattern_h3.finditer(content):
         full_match_text = match.group(1)
         start_index = match.start()
-        end_index = start_index + len(full_match_text)
+        end_index = start_index + len(full_match_text)
+
         text_area.tag_add('h3_tag', text_area.index(f"1.0 + {start_index} chars"), text_area.index(f"1.0 + {end_index} chars"))
         text_area.tag_add('hide_tag', text_area.index(f"1.0 + {start_index} chars"), text_area.index(f"1.0 + {start_index + 4} chars"))
-        
+        
+
     change_font(text_area, CURRENT_FONT_FAMILY)
 def read_notes_from_file():
     """Đọc toàn bộ ghi chú từ file JSON đã chọn."""
