@@ -30,5 +30,3 @@ Hoàn toàn offline, không cần mạng.
 Không quảng cáo.
 Miễn phí 100%.
 
-7. Chính Sách & Bảo Mật (Security First)
-?
