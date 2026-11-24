@@ -5,7 +5,7 @@ import json
 from datetime import datetime
 import re 
 from tkinter import font as tkfont # Import tkfont để quản lý font
-
+ # Mong code chạy và không có lỗi, làm ơn.
 DATA_FILEPATH = None
 ALL_NOTES = []
 CURRENT_NOTE_INDEX = -1
