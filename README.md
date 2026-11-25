@@ -28,3 +28,5 @@ Phiên bản 1.1 ( Windows ): https://drive.google.com/file/d/1x6GnUE_bNTvHRWEO2
 
 Phiên bản 1.0 ( Windows ): https://drive.google.com/file/d/14ie8bCvRTPlIzJtNYaeLvGCKBH1xQhGW/view?usp=sharing
 
+Hoặc tải với: https://github.com/dmlong9999-eng/Gi-i-thi-u-v-Ghi-ch-Si-u-T-c-made-in-vietnam/releases/download/v1.1.1/Ghi.chu.Sieu.T.c.1.1.zip
+
