@@ -36,7 +36,7 @@ def change_font(text_area, new_font_family):
         current_content = text_area.get("1.1", tk.END)
         parse_markdown_to_text_and_tags(current_content, text_area)
     
-print("Font đã được đổi thành: {new_font_family}")
+print(f"Font đã được đổi thành: {new_font_family}")
 
 
 def parse_markdown_to_text_and_tags(content, text_area):
