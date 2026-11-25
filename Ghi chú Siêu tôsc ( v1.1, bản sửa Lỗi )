@@ -18,7 +18,7 @@ CURRENT_FONT_SIZE = 12
 
 def change_font(text_area, new_font_family):
 
-    global CURRENT_FONT_FAMILY
+    global CURRENT_FONT_FAMIL
 
     CURRENT_FONT_FAMILY = new_font_family
 
