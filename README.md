@@ -1,5 +1,3 @@
-Đây là một ghi chú chạy trực tiếp tiếp trên Python, vì còn sơ khai nên chưa có .exe và vẫn còn lỗi. Nó chỉ là một ứng dụng Ghi Chú bình thường, bạn phải tạo file lưu mới và nhớ địa chỉ đường dẫn của file đó để mở.
-
 Chúng tôi sẽ giới thiệu về app Ghi Chú Siêu Tốc beta 1.1
 1.  Mở Đầu
 Khi bật app: Sẽ hỏi bạn muốn mở file đã có (Yes) hay tạo dữ liệu mới (No).
