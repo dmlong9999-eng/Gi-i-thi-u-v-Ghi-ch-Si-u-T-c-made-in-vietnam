@@ -24,9 +24,14 @@ Cho phép dán link trực tiếp vào ghi chú.
 Chọn font hiển thị cho dễ đọc.
 Không giới hạn dòng trong mục chính.
 
+
+Phiên bản 1.2 ( Windows ): https://github.com/dmlong9999-eng/Gi-i-thi-u-v-Ghi-ch-Si-u-T-c-made-in-vietnam/releases/download/v1.2/Ghi.chu.Sieu.T.c.v1.2.py
+
 Phiên bản 1.1 ( Windows ): https://drive.google.com/file/d/1x6GnUE_bNTvHRWEO25FwGKz1ldM5TWt-/view?usp=sharing
 
 Phiên bản 1.0 ( Windows ): https://drive.google.com/file/d/14ie8bCvRTPlIzJtNYaeLvGCKBH1xQhGW/view?usp=sharing ( bản cũ, không khởi động được )
+
+
 
 
 
