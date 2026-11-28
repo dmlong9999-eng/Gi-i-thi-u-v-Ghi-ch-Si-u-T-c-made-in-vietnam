@@ -1059,6 +1059,6 @@ def setup_app():
 
 if __name__ == "__main__":
     print("==================================================")
-    print("ỨNG DỤNG GHI CHÚ SIÊU TỐC - PHIÊN BẢN BETA_1.1_MADE_IN_VIETNAM")
+    print("ỨNG DỤNG GHI CHÚ SIÊU TỐC - PHIÊN BẢN BETA_1.2")
     print("==================================================")
     setup_app()
